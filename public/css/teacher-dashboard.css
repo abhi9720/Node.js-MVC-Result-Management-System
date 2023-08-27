@@ -1,7 +1,10 @@
 .table td.fit, 
 .table th.fit {
     white-space: nowrap !important;
-    min-width: fit-content;
+    /* min-width: fit-content; */
     text-align: center;
-    
+}
+
+td.fit:nth-child(1){
+    font-weight: 600;
 }

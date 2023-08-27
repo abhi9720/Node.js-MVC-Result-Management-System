@@ -26,3 +26,9 @@ body{
 .back-button:hover {
   background-color: #0056b3;
 }
+
+@media(max-width:498px){
+  .back-button {
+    top: 82px;
+  }
+}
