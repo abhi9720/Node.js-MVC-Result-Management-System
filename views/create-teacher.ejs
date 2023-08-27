@@ -10,7 +10,7 @@
         <div class="card-body">
           <% if (locals?.error) { %>
             <div class="alert alert-danger">
-              <%= locals?.error %>
+              <pre><%= locals?.error %></pre>
             </div>
           <% } %> 
           <form action="/teacher/create" method="POST">

@@ -9,7 +9,7 @@ router.post('/create', authMiddleware, resultController.createRecord);
 
 // Show edit form
 router.get('/edit/:id', authMiddleware, resultController.showEditForm);
-router.post('/update/:id', authMiddleware, resultController.updateRecord);
+router.post('/edit/:id', authMiddleware, resultController.updateRecord);
 
 // Delete record
 router.post('/delete/:id', authMiddleware, resultController.deleteRecord);

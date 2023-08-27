@@ -17,7 +17,7 @@ const resultSchema = new Schema({
   },
   score: {
     type: Number,
-    required: true,
+    required: [true, "Student Score is required"],
     min: [0, 'Minimum Marks Can be 0'],
     max: [100, 'Maximum marks can be 100']
   }

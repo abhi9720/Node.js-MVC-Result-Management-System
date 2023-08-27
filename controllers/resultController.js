@@ -20,14 +20,14 @@ exports.createRecord = async (req, res) => {
     } catch (error) {
         if (error.code === 11000) {
             // Duplicate entry error
-            res.render('create-result', { error: 'Roll Number already exists.' });
+            res.render('create-result', { error: 'Roll Number already exists.', formData : req.body  });
         } else if (error.name === 'ValidationError') {
             // Validation error (missing fields)
             const errorMessages = Object.values(error.errors).map(err => err.message);
-            res.render('create-result', { error: errorMessages.join('\n') });
+            res.render('create-result', { error: errorMessages.join('\n'),  formData : req.body  });
         } else {
             console.error('Error creating record:', error);
-            res.render('create-result', { error: 'An error occurred while creating the record.' });
+            res.render('create-result', { error: 'An error occurred while creating the record.' ,  formData : req.body  });
         }
     }
 };
@@ -36,6 +36,7 @@ exports.createRecord = async (req, res) => {
 // Controller to handle editing a result record
 exports.showEditForm = async (req, res) => {
   const recordId = req.params.id;
+  console.log("recordId : ",recordId);
   try {
     const result = await Result.findById(recordId);
     
@@ -50,26 +51,40 @@ exports.showEditForm = async (req, res) => {
   }
 };
 
-  
-
 
 exports.updateRecord = async (req, res) => {
   const recordId = req.params.id;
   try {
     const { rollno, name, dob, score } = req.body;
 
-    const updatedRecord = await Result.findByIdAndUpdate(
-      recordId,
-      { rollno, name, dob, score },
-      { new: true } 
-    );
+    const existingRecord = await Result.findById(recordId);
+
+    if (!existingRecord) {
+      return res.render('edit-result', { error: 'No record found for this ID.' });
+    }
+
+    // Update the properties
+    existingRecord.rollno = rollno;
+    existingRecord.name = name;
+    existingRecord.dob = dob;
+    existingRecord.score = score;
+
+    // Run validation on the updated properties
+    const validationError = existingRecord.validateSync();
+    if (validationError) {
+      const errorMessages = Object.values(validationError.errors).map(err => err.message);
+      return res.render('edit-result', { error: errorMessages.join('\n'), result: existingRecord });
+    }
+
+    await existingRecord.save();
 
     res.redirect('/teacher/dashboard');  
   } catch (error) {
     console.error('Error updating record:', error);
-    res.render('edit-result', { error: 'An error occurred while updating the record.' });
+    res.render('edit-result', { error: 'An error occurred while editing the record.' });
   }
 };
+
 
 exports.deleteRecord = async (req, res) => {
   const recordId = req.params.id;
