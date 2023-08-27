@@ -1,0 +1,7 @@
+.table td.fit, 
+.table th.fit {
+    white-space: nowrap !important;
+    min-width: fit-content;
+    text-align: center;
+    
+}

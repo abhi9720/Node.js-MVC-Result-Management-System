@@ -1,0 +1,44 @@
+<%- include('partials/header.ejs') %>
+<button class="back-button" onclick="history.back()">&#8592;</button>
+
+<div class="container p-1"> 
+
+  <div class="card">
+    <div class="card-header bg-primary text-white text-center">
+      <h2 class="card-title m-0">Student Result</h2>
+    </div>
+    <div class="text-center">
+      <img src="/assets/result.avif" alt="Student Result Image" class="img-fluid rounded-circle" style="max-width: 200px;">
+    </div>
+    
+    <div class="card-body">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <% if (result) { %>
+            <hr>
+            <div class="mb-4">
+              <h4 class="text-muted">Student Details</h4>
+              <p><strong>Roll Number:</strong> <%= result.rollno %></p>
+              <p><strong>Name:</strong> <%= result.name %></p>
+              <p><strong>Date of Birth:</strong> <%= result.dob.toISOString().substring(0, 10) %></p>
+            </div>
+            <hr>
+            <div class="mb-4">
+              <h4 class="text-muted">Result</h4>
+              <p><strong>Score:</strong> <%= result.score %></p>
+            </div>
+          <% } else if (error) { %>
+            <div class="alert alert-danger" role="alert">
+              <%= error %>
+            </div>
+          <% } else { %>
+            <div class="alert alert-warning" role="alert">
+              No record found for this entry.
+            </div>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<%- include('partials/footer.ejs') %>

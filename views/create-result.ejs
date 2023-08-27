@@ -1,0 +1,42 @@
+<%- include('partials/header.ejs') %>
+<button class="back-button" onclick="history.back()">&#8592;</button>
+
+<div class="container p-1"> 
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6"> 
+      <div class="card shadow-md">
+        <div class="card-header bg-primary text-white">
+          <h2 class="card-title text-center mb-0">Create Result</h2>
+        </div>
+        <div class="card-body">
+          <% if (locals.error) { %>
+            <div class="alert alert-danger">
+              <%= error %>
+            </div>
+          <% } %>
+          <form action="/result/create" method="POST">
+            <div class="form-group mb-3">
+              <label for="rollno">Roll Number</label>
+              <input type="text" class="form-control" id="rollno" name="rollno" placeholder="Enter roll number" value="<%= locals?.formData ? locals?.formData.rollno : '' %>">
+            </div>
+            <div class="form-group mb-3">
+              <label for="name">Name</label>
+              <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" value="<%= locals?.formData ? locals?.formData.name : '' %>">
+            </div>
+            <div class="form-group mb-3">
+              <label for="dob">Date of Birth</label>
+              <input type="date" class="form-control" id="dob" name="dob" value="<%= locals?.formData ? locals?.formData.dob : '' %>">
+            </div>
+            <div class="form-group mb-3">
+              <label for="score">Score</label>
+              <input type="number" class="form-control" id="score" name="score" placeholder="Enter score" value="<%= locals?.formData ? locals?.formData.score : '' %>">
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Create Result</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('partials/footer.ejs') %>

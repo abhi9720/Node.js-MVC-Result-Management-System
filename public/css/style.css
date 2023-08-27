@@ -1,0 +1,28 @@
+body{
+  font-family: 'Open Sans', sans-serif;
+  background-color: #f2f6fa !important;
+}
+
+.back-button:hover {
+  background-color: #0056b3;
+}
+
+
+.back-button {
+  position: absolute;
+  top: 52px;
+  left: 1px;
+  padding: 5px 10px;
+  font-size: 14px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  z-index: 100;
+}
+
+.back-button:hover {
+  background-color: #0056b3;
+}

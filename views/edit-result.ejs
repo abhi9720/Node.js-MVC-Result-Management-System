@@ -1,0 +1,47 @@
+<%- include('partials/header.ejs') %>
+<button class="back-button" onclick="history.back()">&#8592;</button>
+
+<div class="container p-1"> 
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6"> 
+      <div class="card shadow-md">
+        <div class="card-header bg-primary text-white">
+          <h2 class="card-title text-center mb-0">Edit Result</h2>
+        </div>
+        <div class="card-body">
+          <% if (locals?.result) { %>
+            <form action="/result/update/<%= locals?.result._id %>" method="POST">
+              <div class="form-group mb-3">
+                <label for="rollno">Roll Number</label>
+                <input type="text" class="form-control" id="rollno" name="rollno" value="<%= locals?.result.rollno %>" readonly>
+              </div>
+              <div class="form-group mb-3">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" name="name" value="<%= locals?.result.name %>">
+              </div>
+              <div class="form-group mb-3">
+                <label for="dob">Date of Birth</label>
+                <input type="date" class="form-control" id="dob" name="dob" value="<%= locals?.result.dob.toISOString().substring(0, 10) %>">
+              </div>
+              <div class="form-group mb-3">
+                <label for="score">Score</label>
+                <input type="number" class="form-control" id="score" name="score" value="<%= locals?.result.score %>">
+              </div>
+              <button type="submit" class="btn btn-primary btn-block">Update Result</button>
+            </form>
+          <% } else if (error) { %>
+            <div class="alert alert-danger mt-3" role="alert">
+              <%= error %>
+            </div>
+          <% } else { %>
+            <div class="alert alert-danger mt-3" role="alert">
+              No record found for this ID.
+            </div>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('partials/footer.ejs') %>

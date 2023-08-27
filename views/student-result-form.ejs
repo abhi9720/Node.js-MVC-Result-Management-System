@@ -1,0 +1,28 @@
+<%- include('partials/header.ejs') %>
+
+<div class="container p-1"> 
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6"> 
+      <div class="card shadow-md">
+        <div class="card-header bg-primary text-white">
+          <h2 class="card-title text-center">Student Result</h2>
+        </div>
+        <div class="card-body">
+          <form action="/student/result" method="GET">
+            <div class="form-group mb-3">
+              <label for="rollno">Roll Number</label>
+              <input type="text" class="form-control" id="rollno" name="rollno" placeholder="Enter roll number" required>
+            </div>
+            <div class="form-group mb-3">
+              <label for="name">DOB</label>
+              <input type="date" class="form-control" id="dob" name="dob" placeholder="Enter DOB" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Get Result</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('partials/footer.ejs') %>
